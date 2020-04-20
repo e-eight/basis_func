@@ -1,6 +1,5 @@
 #include <cmath>
 #include <stdexcept>
-#include <iostream>
 #include "ho.h"
 
 namespace basis_func {
