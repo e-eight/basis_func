@@ -1,13 +1,12 @@
 #include <fstream>
 #include <iostream>
 #include <iomanip>
-#include <limits>
 #include "ho.h"
 
 int main() {
   int npts = 3001;
-  int n = 2;
-  int l = 2;
+  int n = 10;
+  int l = 20;
   double b = 2.03644;
 
   // Array for wavefunctions.
