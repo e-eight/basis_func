@@ -48,7 +48,7 @@ int main() {
   psinn1.tail(1) = 0;
   double norm_nn1 = psinn1.sum() / npts;
 
-  std::cout << "∫R_{nl} R_{nl} r^2 dr = " << std::setprecision(15) << std::fixed << norm_nn << "\n";
+  std::cout << "∫R_{nl} R_{nl} r^2 dr = " << std::setprecision(10) << std::fixed << norm_nn << "\n";
   std::cout << "∫R_{nl} R_{n-1l} r^2 dr = " << norm_nn1 << "\n";
 
   // Check if all the wave functions are normalized by matrix multiplication.

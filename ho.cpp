@@ -1,5 +1,6 @@
 #include <cmath>
 #include <stdexcept>
+#include <iostream>
 #include "ho.h"
 
 namespace basis_func {
@@ -40,7 +41,6 @@ namespace basis_func {
       }
 
       Eigen::ArrayXd psi_i(npts), psi_im1(npts), psi_im2(npts);
-
       // n = 0
       psi_im2 = (jac * Eigen::pow(x, li)
                  * std::sqrt(2.0 / std::tgamma(li + 1.5))
@@ -55,10 +55,8 @@ namespace basis_func {
       vals.row(1) = psi_im1;
 
       for (int i = 2; i <= ni; ++i) {
-        // psi_i = ((-std::sqrt(2. * i / (1. + 2. * (li + i))) * (2. + (li - 0.5 - x2) / i) * psi_im1)
-        //          - (std::sqrt(4. * i * (i - 1) / (4. * (i + li) * (i + li) - 1.)) * (1. + (li - 0.5) / i) * psi_im2));
-        psi_i = (-(2 * i + li - 0.5 - x2) * std::sqrt(1 / (i * (i + li + 0.5))) * psi_im1
-                 - std::sqrt((i + li - 0.5) * (i - 1) / (i * (i + li + 0.5))) * psi_im2);
+        psi_i = ((-std::sqrt(2. * i / (1. + 2. * (li + i))) * (2. + (li - 0.5 - x2) / i) * psi_im1)
+                 - (std::sqrt(4. * i * (i - 1) / (4. * (i + li) * (i + li) - 1.)) * (1. + (li - 0.5) / i) * psi_im2));
         psi_im2 = psi_im1;
         psi_im1 = psi_i;
         vals.row(i) = psi_i;
