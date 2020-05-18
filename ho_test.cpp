@@ -1,9 +1,11 @@
-#include <fstream>
-#include <iostream>
-#include <iomanip>
 #include "ho.h"
 
-int main() {
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+
+int main()
+{
   int npts = 3001;
   int n = 10;
   int l = 20;
@@ -18,7 +20,8 @@ int main() {
   Eigen::ArrayXd dr = 1 / ((1.0 - x) * (1.0 - x));
 
   try {
-    basis_func::ho::WF(psi, r, n, l, b, basis_func::Space::coordinate);
+    basis_func::ho::WaveFunctionsUptoMaxN(psi, r, n, l, b,
+                                          basis_func::Space::coordinate);
   }
   catch (std::exception& e) {
     std::cout << e.what() << "\n";
@@ -35,20 +38,20 @@ int main() {
   file.close();
 
   // Wavefunction norm.
-
   Eigen::ArrayXd psin2 = psi.row(n).square();
   psin2 *= r * r * dr;
   psin2.head(1) *= 0.5;
   psin2.tail(1) = 0;
   double norm_nn = psin2.sum() / npts;
 
-  Eigen::ArrayXd psinn1 = psi.row(n) * psi.row(n-1);
+  Eigen::ArrayXd psinn1 = psi.row(n) * psi.row(n - 1);
   psinn1 *= r * r * dr;
   psinn1.head(1) *= 0.5;
   psinn1.tail(1) = 0;
   double norm_nn1 = psinn1.sum() / npts;
 
-  std::cout << "∫R_{nl} R_{nl} r^2 dr = " << std::setprecision(10) << std::fixed << norm_nn << "\n";
+  std::cout << "∫R_{nl} R_{nl} r^2 dr = " << std::setprecision(10) << std::fixed
+            << norm_nn << "\n";
   std::cout << "∫R_{nl} R_{n-1l} r^2 dr = " << norm_nn1 << "\n";
 
   // Check if all the wave functions are normalized by matrix multiplication.

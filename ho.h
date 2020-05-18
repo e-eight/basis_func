@@ -1,7 +1,8 @@
 /*******************************************************************************
  ho.h
 
- Computes all the radial harmonic oscillator wave functions up to a given n.
+ Computes all the radial harmonic oscillator wave functions up to a given radial
+ quantum number.
  Ported from Kyle Wendt's Python code.
 
  Language: C++11
@@ -13,18 +14,21 @@
 #define HO_H_
 
 #include <Eigen/Dense>
-#include "space.h"
+#include <vector>
+
+#include "basis_func.h"
 
 namespace basis_func {
-  namespace ho {
+namespace ho {
+void WaveFunctionsUptoMaxN(Eigen::ArrayXXd& vals, const Eigen::ArrayXd& pts,
+                           const std::size_t& max_n, const std::size_t& l,
+                           const double& length, const Space& space);
 
-    void WF(Eigen::ArrayXXd& vals,
-            const Eigen::ArrayXd& pts,
-            const std::size_t& n,
-            const std::size_t& l,
-            const double& length,
-            const Space& space);
-  }
-}
+void WaveFunctionsUptoMaxL(std::vector<Eigen::ArrayXXd>& wfs,
+                           const Eigen::ArrayXd& pts, const std::size_t& max_n,
+                           const std::size_t& max_l, const double& length,
+                           const Space& space);
+}  // namespace ho
+}  // namespace basis_func
 
 #endif

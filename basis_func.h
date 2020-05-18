@@ -1,18 +1,19 @@
 /*******************************************************************************
- space.h
+ basis_func.h
 
- Defines an enum class for coordinate / momentum space for wave functions.
+ Utility functions and classes for basis_func library.
 
  Language: C++11
  Soham Pal
  Iowa State University
 *******************************************************************************/
 
-#ifndef SPACE_H_
-#define SPACE_H_
+#ifndef BASIS_FUNC_H_
+#define BASIS_FUNC_H_
 
 namespace basis_func {
-  enum class Space { coordinate, momentum };
-}
+// Enum class for coordinate / momentum integrals.
+enum class Space { coordinate, momentum };
+}  // namespace basis_func
 
 #endif
